@@ -16,6 +16,7 @@ app.use(bodyParser.json())
 conectDB()
 
 require('./routers/user')(app)
+require('./routers/genre')(app)
 
 app.listen(3000, () =>{
     console.log('Se levanto el servidor.......')
