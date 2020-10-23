@@ -13,7 +13,7 @@ exports.create = (req, res ) =>{
     }
     const genre = new GenreModel({
         name: req.body.name,
-        name: req.body.status,
+        status: req.body.status,
         
     
     })
