@@ -77,3 +77,53 @@ exports.update = (req, res) =>{
 
 
 }
+
+
+/**
+ * Metodo Para listar un Libro
+ * @param {*} req =>  Todo lo que recibe 
+ * @param {*} res => Respuesta que se devuelve 
+ */
+exports.getAll = (req, res) =>{
+    BookModel.find()
+    .populate('genre') //Metodo el cual nos permite traer los datos de la coleccion con la que tiene la relacion 
+    .exec ()  //Se ejecuta La Consulta 
+    .then( (books) => res.send (books) )
+    .catch(
+        (error) => {
+            res.status(500).send ({
+                message: error.message
+            })
+
+        }
+    )
+}
+
+
+exports.getOne = (req, res) =>{
+    BookModel.findById(req.params.id)
+    .populate ('genre')
+    .exec ()
+    .then ( (book) =>{ res.send (book )})
+    .catch(
+        (error) =>{
+            res.status(500).send ({
+                message: error.message
+            })
+        }
+    
+    )
+}
+
+exports.deleteOne = (req, res) =>{
+    BookModel.findByIdAndRemove(req.params.id)
+    .then ( (book) =>{ res.send (book )})
+    .catch(
+        (error) =>{
+            res.status(500).send ({
+                message: error.message
+            })
+        }
+    
+    )
+}
