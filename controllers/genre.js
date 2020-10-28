@@ -66,3 +66,42 @@ exports.update = (req, res) =>{
 
 
 }
+/**
+ * Metodo para Listar los Generos
+ * @param {*} req 
+ * @param {*} res 
+ */
+
+exports.getAll = (req, res) =>{
+    GenreModel.find()
+    .populate('Genre')
+    .exec ()  
+    .then( (genre) => res.send (genre) )
+    .catch(
+        (error) => {
+            res.status(500).send ({
+                message: error.message
+            })
+
+        }
+    )
+}
+/**
+ * Metodo para Listar un    Genero
+ * @param {*} req => Todo lo que enviamos desde el body
+ * @param {*} res => La respuesta que se devolvera 
+ */
+exports.getOne = (req, res) =>{
+    GenreModel.findById(req.params.id)
+    .populate ('Genre')
+    .exec ()
+    .then ( (genre) =>{ res.send (genre )})
+    .catch(
+        (error) =>{
+            res.status(500).send ({
+                message: error.message
+            })
+        }
+    
+    )
+}
